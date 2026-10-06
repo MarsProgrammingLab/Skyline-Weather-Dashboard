@@ -5,8 +5,6 @@ Search any city to see its conditions right now, the next 24 hours on a chart, a
  
 Built in HTML, CSS, and JavaScript.
  
-Weather data by [Open-Meteo](https://open-meteo.com), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
- 
 ---
  
 
