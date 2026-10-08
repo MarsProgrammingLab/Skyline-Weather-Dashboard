@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyline</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="src/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <img src="assets/images/logo.svg" alt="Weather now" width="197" height="40">
+        
+        <div class="dropdown">
+            <button type="button">Units</button>
+            <button type="button">Switch to imperial</button>
+
+            <fieldset>
+                <legend>Temperature</legend>
+                <label><input type="radio" name="temperature" value="c" checked> Celsius (℃)</label>
+                <label><input type="radio" name="temperature" value="f"> Fahrenheit (℉)</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Wind Speed</legend>
+                <label><input type="radio" name="wind-speed" value="kmh" checked> km/h</label>
+                <label><input type="radio" name="wind-speed" value="mph"> mph</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Precipitation</legend>
+                <label><input type="radio" name="precipitation" value="mm" checked> Millimeters (mm)</label>
+                <label><input type="radio" name="precipitation" value="in"> Inches (in)</label>
+            </fieldset>
+        </div>
+    </header>
+    <main id="main-content">
+        <h1 class="main-h1">How's the sky looking today?</h1>
+        <form id="search-form" role="search">
+            <input type="search" id="search" name="q" placeholder="Search for a place..." required>
+            <button type="submit">Search</button>
+        </form>
+
+       <section aria-labelledby="location-title">
+            <h2 id="location-title">Charlotte, North Carolina</h2>
+            <p><time datetime="2026-10-08">Thursday, October 8, 2026</time></p>
+            <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+            <p class="location-temp">20°</p>
+            <dl id="metrics">
+                <dt>Feels like</dt>
+                <dd>18°</dd>
+                <dt>Humidity</dt>
+                <dd>46%</dd>
+                <dt>Wind</dt>
+                <dd>14 km/h</dd>
+                <dt>Precipitation</dt>
+                <dd>0 mm</dd>
+            </dl>
+       </section> 
+        <section aria-labelledby="daily-title">
+            <h2 id="daily-title">Daily forecast</h2>
+            <ol>
+                <li>
+                    <p><time datetime="2026-10-08">Thursday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                    
+                </li>
+                <li>
+                    <p><time datetime="2026-10-09">Friday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                </li>
+                <li>
+                    <p><time datetime="2026-10-10">Saturday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                </li>
+                <li>
+                    <p><time datetime="2026-10-11">Sunday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                </li>
+                <li>
+                    <p><time datetime="2026-10-12">Monday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                </li>
+                <li>
+                    <p><time datetime="2026-10-13">Tuesday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                </li>
+                <li>
+                    <p><time datetime="2026-10-14">Wednesday</time></p>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <dl>
+                        <dt>High</dt>
+                        <dd class="high-temp">20°</dd>
+                        <dt>Low</dt>
+                        <dd class="low-temp">10°</dd>
+                    </dl>
+                </li>
+            </ol>
+        </section>
+
+        <section aria-labelledby="hourly-title">
+            <h2 id="hourly-title">Hourly forecast</h2>
+            <label for="day">Day selection</label>
+            <select name="day" id="day">
+                <option value="2026-10-08" selected>Thursday</option>
+                <option value="2026-10-09">Friday</option>
+                <option value="2026-10-10">Saturday</option>
+                <option value="2026-10-11">Sunday</option>
+                <option value="2026-10-12">Monday</option>
+                <option value="2026-10-13">Tuesday</option>
+                <option value="2026-10-14">Wednesday</option>
+            </select>
+            <ol>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T15:00">3 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T16:00">4 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T17:00">5 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T18:00">6 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T19:00">7 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T20:00">8 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T21:00">9 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+                <li>
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                    <p><time datetime="2026-10-08T22:00">10 PM</time></p>
+                    <p class="hourly-temp">20°</p>
+                </li>
+            </ol>
+        </section>
+    </main>
+    <footer class="attribution">
+        <p>Weather data by <a href="https://open-meteo.com/">Open-Meteo</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+        <p>Challenge by <a href="https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49">Frontend Mentor</a>. </p>
+        <p>Developed by <a href="https://github.com/MarsProgrammingLab">Martavias Cary</a>.</p>
+    </footer>
+</body>
+</html>
