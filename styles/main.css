@@ -1,5 +1,9 @@
 @import url('https://googleapis.com');
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
     --color-neutral-900: hsl(243, 96%, 9%);
     --color-neutral-800: hsl(243, 27%, 20%);
@@ -11,6 +15,9 @@
 
     --color-orange-500: hsl(28, 100%, 52%);
     --color-blue-700: hsl(248, 70%, 36%);
+
+    --font-body: "DM Sans", system-ui, sans-serif;
+    --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
 }
 
 /* ---------- Fonts ---------- */
@@ -39,6 +46,51 @@
 }
 
 body {
-    background-color: #02012b;
-    color: #fefffb;
+    margin: 0;
+    background-color: var(--color-neutral-900);
+    color: var(--color-neutral-0);
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+p {
+    margin: 0;
+}
+
+dl {
+    margin: 0;
+}
+
+dt {
+    margin: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input, button {
+    font: inherit;
+}
+
+.visually-hidden {
+    border: 0;
+    clip-path: inset(50%);
 }
