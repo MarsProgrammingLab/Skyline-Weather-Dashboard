@@ -1,3 +1,5 @@
 # Ignore docs directory
 docs/
 design/
+
+.DS_Store
