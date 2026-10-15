@@ -3,6 +3,7 @@
 }
 
 :root {
+    /* Colors */
     --color-neutral-900: hsl(243, 96%, 9%);
     --color-neutral-800: hsl(243, 27%, 20%);
     --color-neutral-700: hsl(243, 23%, 24%);
@@ -15,8 +16,22 @@
     --color-blue-500: hsl(233, 67%, 56%);
     --color-blue-700: hsl(248, 70%, 36%);
 
+    /* Fonts */
     --font-body: "DM Sans", system-ui, sans-serif;
     --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
+
+    /* Radius */
+    --radius-sm: 0.75rem;     /* 16 x .75rem = 12px: inputs, buttons */
+    --radius-lg: 2rem;     /* 16 x 2rem = 32px: cards */
+    --radius-xl: 3rem;
+
+    /* Number in spacing name is the step on a 4px grid */
+    --space-2: 0.5rem;      /* 2 x 4px = 8px */
+    --space-3: .75rem;      /* 3 X 4px = 12px */ 
+    --space-4: 1rem;        /* 4 x 4px = 16px */
+    --space-6: 1.5rem;      /* 6 x 4 px = 24px */
+    --space-8: 2rem;        /* 8 x 4 px = 32px */
+
 }
 
 /* ---------- Fonts ---------- */
@@ -71,44 +86,36 @@ p {
     margin: 0;
 }
 
-li {
-    list-style: none;
-    padding: 0;
-}
-
-dl {
+dl, dd {
     margin: 0;
 }
 
-dt {
-    margin: 0;
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+[role="list"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 header > img {
     max-width: 10rem;
-    width: 100%;
-    height: auto;
 }
 
 .current-condition > img {
     max-width: 7rem;
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 .day-list img {
     max-width: 5rem;
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 .hourly-panel img {
     max-width: 3rem;
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 input, button, select,textarea {
@@ -121,87 +128,96 @@ input, button, select,textarea {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 48px;
-    padding: 30px;
-    max-height: 60rem;
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
     max-width: 60rem;
 }
 
 
-#metrics > dt {
-    font-size: 25px;
+.metrics > dt {
+    font-size: 1.5rem;
 }
 
-#metrics > dd {
-    font-size: 30px;
+.metrics > dd {
+    font-size: 1.75rem;
 }
 
-#search {
+.search{
     background-color: var(--color-neutral-800);
     border: none;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
     color: var(--color-neutral-0);
 }
 
-#search:focus-visible {
-    outline: 2px solid var(--color-neutral-0);
-    outline-offset: 1px;
-}
 
-#search-form > button {
+.search-btn {
     background-color: var(--color-blue-500);
     border: none;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
     color: var(--color-neutral-0);
 }
 
-#search-form > button:hover {
-  background-color: var(--color-blue-700);
+.search-btn:hover {
+    background-color: var(--color-blue-700);
 }
 
-#search-form > button:focus-visible,
-#search:focus-visible,
-#day:focus-visible {
+.day:hover,
+.dropdown > button:hover {
+  background-color: var(--color-neutral-700);
+  cursor: pointer;
+}
+
+.search-btn:focus-visible,
+.search:focus-visible,
+.day:focus-visible,
+.dropdown > button:focus-visible {
   outline: 2px solid var(--color-orange-500);
   outline-offset: 1px;
 }
 
-#day {
+.day {
     background-color: var(--color-neutral-600);
     color: var(--color-neutral-0);
     border: none;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
 }
 
 .dropdown > button {
     background-color: var(--color-neutral-800);
     color: var(--color-neutral-0);
     border: none;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+}
+
+.hourly-panel {
+    background-color: var(--color-neutral-800); 
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
 }
 
 .day-list > li {
     background-color: var(--color-neutral-800);
     border: 1px solid var(--color-neutral-600);
-    border-radius: 32px;
-    padding: 30px;
-}
-
-.hourly-panel {
-   background-color: var(--color-neutral-800); 
-   border-radius: 32px;
-   padding: 30px;
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
 }
 
 .hourly-row > li {
     background-color: var(--color-neutral-700);
     border: 2px solid var(--color-neutral-600);
-    border-radius: 32px;
-    padding: 30px;
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+}
+
+.location-temp {
+    font-weight: 600;
+    font-style: italic;
+    font-size: 6rem;
+    line-height: 1;
 }
 
 .visually-hidden {

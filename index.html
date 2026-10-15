@@ -37,8 +37,8 @@
     <main id="main-content">
         <h1 class="main-h1">How's the sky looking today?</h1>
         <form id="search-form" role="search">
-            <input type="search" id="search" name="q" placeholder="Search for a place..." required>
-            <button type="submit">Search</button>
+            <input type="search" id="search" class ="search" name="q" placeholder="Search for a place..." required>
+            <button type="submit" class="search-btn">Search</button>
         </form>
 
        <section aria-labelledby="location-title" class="current-condition">
@@ -46,7 +46,7 @@
             <p><time datetime="2026-10-08">Thursday, October 8, 2026</time></p>
             <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
             <p class="location-temp">20°</p>
-            <dl id="metrics">
+            <dl id="metrics" class="metrics">
                 <dt>Feels like</dt>
                 <dd>18°</dd>
                 <dt>Humidity</dt>
@@ -137,7 +137,7 @@
         <section aria-labelledby="hourly-title" class="hourly-panel">
             <h2 id="hourly-title">Hourly forecast</h2>
             <label for="day" class="visually-hidden">Day selection</label>
-            <select name="day" id="day">
+            <select name="day" id="day" class="day">
                 <option value="2026-10-08" selected>Thursday</option>
                 <option value="2026-10-09">Friday</option>
                 <option value="2026-10-10">Saturday</option>

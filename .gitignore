@@ -1,5 +1,4 @@
 # Ignore docs directory
 docs/
 design/
-
 assets/.DS_Store
