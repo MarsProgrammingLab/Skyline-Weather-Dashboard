@@ -12,40 +12,49 @@
         <img src="assets/images/logo.svg" alt="Weather now" width="197" height="40">
         
         <div class="dropdown">
-            <button type="button">Units</button>
-            <button type="button">Switch to imperial</button>
+            <button type="button" class="menu-btn">Units</button>
+            <div class="units-panel">
+                <button type="button" class="menu-btn">Switch to imperial</button>
+                <fieldset>
+                    <legend>Temperature</legend>
+                    <label><input type="radio" name="temperature" value="c" checked> Celsius (℃)</label>
+                    <label><input type="radio" name="temperature" value="f"> Fahrenheit (℉)</label>
+                </fieldset>
 
-            <fieldset>
-                <legend>Temperature</legend>
-                <label><input type="radio" name="temperature" value="c" checked> Celsius (℃)</label>
-                <label><input type="radio" name="temperature" value="f"> Fahrenheit (℉)</label>
-            </fieldset>
+                <fieldset>
+                    <legend>Wind Speed</legend>
+                    <label><input type="radio" name="wind-speed" value="kmh" checked> km/h</label>
+                    <label><input type="radio" name="wind-speed" value="mph"> mph</label>
+                </fieldset>
 
-            <fieldset>
-                <legend>Wind Speed</legend>
-                <label><input type="radio" name="wind-speed" value="kmh" checked> km/h</label>
-                <label><input type="radio" name="wind-speed" value="mph"> mph</label>
-            </fieldset>
-
-            <fieldset>
-                <legend>Precipitation</legend>
-                <label><input type="radio" name="precipitation" value="mm" checked> Millimeters (mm)</label>
-                <label><input type="radio" name="precipitation" value="in"> Inches (in)</label>
-            </fieldset>
+                <fieldset>
+                    <legend>Precipitation</legend>
+                    <label><input type="radio" name="precipitation" value="mm" checked> Millimeters (mm)</label>
+                    <label><input type="radio" name="precipitation" value="in"> Inches (in)</label>
+                </fieldset>
+            </div>
+            
         </div>
     </header>
     <main id="main-content">
         <h1 class="main-h1">How's the sky looking today?</h1>
-        <form id="search-form" role="search">
-            <input type="search" id="search" class ="search" name="q" placeholder="Search for a place..." required>
+        <form id="search-form" role="search" class="search-form">
+            <input type="search" id="search" class="search" name="q" placeholder="Search for a place..." required>
             <button type="submit" class="search-btn">Search</button>
         </form>
 
        <section aria-labelledby="location-title" class="current-condition">
-            <h2 id="location-title">Charlotte, North Carolina</h2>
-            <p><time datetime="2026-10-08">Thursday, October 8, 2026</time></p>
-            <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-            <p class="location-temp">20°</p>
+            <div class="today-summary">
+                <div class="today-place">
+                    <h2 id="location-title">Charlotte, North Carolina</h2>
+                    <p><time datetime="2026-10-08">Thursday, October 8, 2026</time></p>
+                </div>
+                <div class="today-temp">
+                    <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320" class="today-icon">
+                    <p class="location-temp">20°</p>
+                </div>
+            </div>
+            
             <dl id="metrics" class="metrics">
                 <dt>Feels like</dt>
                 <dd>18°</dd>
@@ -63,7 +72,7 @@
                 <li>
                     <p><time datetime="2026-10-08">Thursday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -74,7 +83,7 @@
                 <li>
                     <p><time datetime="2026-10-09">Friday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -84,7 +93,7 @@
                 <li>
                     <p><time datetime="2026-10-10">Saturday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -94,7 +103,7 @@
                 <li>
                     <p><time datetime="2026-10-11">Sunday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -104,7 +113,7 @@
                 <li>
                     <p><time datetime="2026-10-12">Monday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -114,7 +123,7 @@
                 <li>
                     <p><time datetime="2026-10-13">Tuesday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -124,7 +133,7 @@
                 <li>
                     <p><time datetime="2026-10-14">Wednesday</time></p>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                    <dl>
+                    <dl class="day-temps">
                         <dt class="visually-hidden">High</dt>
                         <dd class="high-temp">20°</dd>
                         <dt class="visually-hidden">Low</dt>
@@ -135,17 +144,20 @@
         </section>
 
         <section aria-labelledby="hourly-title" class="hourly-panel">
-            <h2 id="hourly-title">Hourly forecast</h2>
-            <label for="day" class="visually-hidden">Day selection</label>
-            <select name="day" id="day" class="day">
-                <option value="2026-10-08" selected>Thursday</option>
-                <option value="2026-10-09">Friday</option>
-                <option value="2026-10-10">Saturday</option>
-                <option value="2026-10-11">Sunday</option>
-                <option value="2026-10-12">Monday</option>
-                <option value="2026-10-13">Tuesday</option>
-                <option value="2026-10-14">Wednesday</option>
-            </select>
+            <div class="hourly-header">
+                <h2 id="hourly-title">Hourly forecast</h2>
+                <label for="day" class="visually-hidden">Day selection</label>
+                <select name="day" id="day" class="day">
+                    <option value="2026-10-08" selected>Thursday</option>
+                    <option value="2026-10-09">Friday</option>
+                    <option value="2026-10-10">Saturday</option>
+                    <option value="2026-10-11">Sunday</option>
+                    <option value="2026-10-12">Monday</option>
+                    <option value="2026-10-13">Tuesday</option>
+                    <option value="2026-10-14">Wednesday</option>
+                </select>
+            </div>
+            
             <ol role="list" class="hourly-row">
                 <li>
                     <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">

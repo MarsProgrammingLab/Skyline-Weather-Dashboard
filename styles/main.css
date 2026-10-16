@@ -20,6 +20,7 @@
     --font-body: "DM Sans", system-ui, sans-serif;
     --font-display: "Bricolage Grotesque", "DM Sans", system-ui, sans-serif;
 
+    /* 1rem = 16px */
     /* Radius */
     --radius-sm: 0.75rem;     /* 16 x .75rem = 12px: inputs, buttons */
     --radius-lg: 2rem;     /* 16 x 2rem = 32px: cards */
@@ -70,10 +71,11 @@ body {
 }
 
 h1 {
+    text-align: center;
     margin: 0;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 3.25rem;
 }
 
 h2 {
@@ -102,11 +104,18 @@ img {
   padding: 0;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+}
+
 header > img {
     max-width: 10rem;
 }
 
-.current-condition > img {
+.today-icon {
     max-width: 7rem;
 }
 
@@ -123,6 +132,8 @@ input, button, select,textarea {
 }
 
 .current-condition {
+    display: flex;
+    flex-direction: column;
     background-image: url("../assets/images/bg-today-large.svg");
     background-color: var(--color-blue-700);
     background-size: cover;
@@ -130,9 +141,21 @@ input, button, select,textarea {
     background-repeat: no-repeat;
     border-radius: var(--radius-xl);
     padding: var(--space-8);
+    gap: var(--space-8);
     max-width: 60rem;
 }
 
+.today-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.today-temp {
+    display: flex; 
+    align-items: center; 
+    gap: var(--space-2);
+}
 
 .metrics > dt {
     font-size: 1.5rem;
@@ -142,7 +165,16 @@ input, button, select,textarea {
     font-size: 1.75rem;
 }
 
+.search-form {
+    display: flex;
+    max-width: 35rem;
+    margin-inline: auto;
+    gap: var(--space-4);
+}
+
 .search{
+    flex-grow: 1;
+    min-width: 0;
     background-color: var(--color-neutral-800);
     border: none;
     border-radius: var(--radius-sm);
@@ -152,6 +184,7 @@ input, button, select,textarea {
 
 
 .search-btn {
+    flex: none;
     background-color: var(--color-blue-500);
     border: none;
     border-radius: var(--radius-sm);
@@ -164,7 +197,7 @@ input, button, select,textarea {
 }
 
 .day:hover,
-.dropdown > button:hover {
+.menu-btn:hover {
   background-color: var(--color-neutral-700);
   cursor: pointer;
 }
@@ -172,7 +205,7 @@ input, button, select,textarea {
 .search-btn:focus-visible,
 .search:focus-visible,
 .day:focus-visible,
-.dropdown > button:focus-visible {
+.menu-btn:focus-visible {
   outline: 2px solid var(--color-orange-500);
   outline-offset: 1px;
 }
@@ -185,7 +218,7 @@ input, button, select,textarea {
     padding: var(--space-3);
 }
 
-.dropdown > button {
+.menu-btn {
     background-color: var(--color-neutral-800);
     color: var(--color-neutral-0);
     border: none;
@@ -194,23 +227,55 @@ input, button, select,textarea {
 }
 
 .hourly-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
     background-color: var(--color-neutral-800); 
     border-radius: var(--radius-lg);
     padding: var(--space-8);
 }
 
+.hourly-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .day-list > li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--color-neutral-800);
     border: 1px solid var(--color-neutral-600);
     border-radius: var(--radius-lg);
     padding: var(--space-8);
+    gap: var(--space-4);
+}
+
+.day-temps {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: stretch;
+}
+.hourly-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
 }
 
 .hourly-row > li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
     background-color: var(--color-neutral-700);
     border: 2px solid var(--color-neutral-600);
     border-radius: var(--radius-lg);
-    padding: var(--space-8);
+    padding: var(--space-4);
+}
+
+.hourly-temp {
+    margin-inline-start: auto;
 }
 
 .location-temp {
