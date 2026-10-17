@@ -12,8 +12,8 @@
         <img src="assets/images/logo.svg" alt="Weather now" width="197" height="40">
         
         <div class="dropdown">
-            <button type="button" class="menu-btn">Units</button>
-            <div class="units-panel">
+            <button type="button" class="menu-btn" aria-controls="units-panel" aria-expanded="false">Units</button>
+            <div id="units-panel" class="units-panel" hidden>
                 <button type="button" class="menu-btn">Switch to imperial</button>
                 <fieldset>
                     <legend>Temperature</legend>
