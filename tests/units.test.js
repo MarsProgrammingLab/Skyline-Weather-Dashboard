@@ -3,8 +3,7 @@ import assert from "node:assert/strict";
 import { celsiusToFahrenheit, kmhToMph, mmToInches } from "../src/units.js";
 
 
-test("kmhToMph converts 14 km to 8.70 mile", () => {
-    console.log(kmhToMph(14).toFixed(2));
+test("kmhToMph converts 14 km/h to 8.70 mph", () => {
   assert.equal(kmhToMph(14).toFixed(2), "8.70");
 });
 
@@ -13,7 +12,7 @@ test("kmhToMph converts 0 km to 0 mile", () => {
 });
 
 
-test("celsiusToFahrenheit(20) converts to 32", () => {
+test("celsiusToFahrenheit(20) converts to 68", () => {
   assert.equal(celsiusToFahrenheit(20), 68);
 });
 
