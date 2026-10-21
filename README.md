@@ -23,6 +23,17 @@ Built with plain HTML, CSS, and JavaScript (no frameworks, no libraries, no buil
 - **Local times everywhere.** Each place's forecast is shown in that place's own time zone.
 - **One module talks to the API.** The rest of the app works with Skyline's own forecast shape, so an API change touches a single file.
 - **Offline support.** Preferences live in `localStorage`; the last forecast is cached in IndexedDB.
+
+## Decisions
+
+**Unknown or missing weather codes fall back to the overcast icon.**
+Open-Meteo describes the weather with a WMO code, and the design has an icon for each group of codes but none for "unknown". Any code outside the table, plus `undefined` and `null` (Open-Meteo uses `null` for gaps in its hourly data), returns `"overcast"`.
+
+- *Why:* the code comes from the network, so a bad value shouldn't break the page. Overcast is the most neutral of the eight icons: a grey cloud doesn't claim sun, rain, or a storm, so it misleads the least.
+- *Trade-off:* a bad or missing code shows up as overcast weather instead of failing loudly, so the bug is easy to miss. The alt text also says "Overcast" when the honest answer is "unknown".
+- *Alternatives considered:* returning `null` (every caller would have to check before building an image path) and throwing an error (one bad hour would break the whole hourly list unless every render call caught it).
+- *Follow-up:* when rendering, show "Weather unavailable" as the alt text for a missing code, so screen-reader users get the truth even though the icon is a fallback.
+
 ## Running locally
  
 Clone the repository and serve the folder with any static server, then open the address it prints:
