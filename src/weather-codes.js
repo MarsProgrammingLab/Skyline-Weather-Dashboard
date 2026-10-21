@@ -1,10 +1,10 @@
-// weatherCodeToIcon(code)
-//   input:  a WMO code (number), e.g. 63
-//   output: one of the 8 icon keys (string), e.g. "rain"
-//   - a switch on code
-//   - group the cases: several `case` lines stacked above one `return`
-//     (fall-through on purpose; no break needed because return exits)
-//   - default: see "Decision" below
+/**
+ * Maps an Open-Meteo WMO weather code to one of Skyline's eight icon keys.
+ * Unknown codes, `undefined`, and `null` fall back to "overcast" (see README → Decisions).
+ * @param {number} code - WMO weather code from Open-Meteo, e.g. 63.
+ * @returns {string} Icon key: "sunny", "partly-cloudy", "overcast", "fog",
+ *   "drizzle", "rain", "snow", or "storm".
+ */
 export function weatherCodeToIcon(code) {
     switch (code) {
         case 0:
@@ -28,11 +28,12 @@ export function weatherCodeToIcon(code) {
     }
 }
 
-// iconLabel(icon)
-//   input:  an icon key, e.g. "partly-cloudy"
-//   output: readable alt text, e.g. "Partly cloudy"
-//   - another switch, one case per key
-//   - default: decide what makes sense for alt text
+/**
+ * Returns human-readable alt text for an icon key.
+ * @param {string} iconName - One of the eight icon keys, e.g. "partly-cloudy".
+ * @returns {string} Alt text, e.g. "Partly cloudy".
+ * @throws {Error} If iconName is not one of the eight keys (a bug in the caller).
+ */
 export function iconLabel(iconName) {
     switch (iconName) {
         case 'sunny':
@@ -56,11 +57,11 @@ export function iconLabel(iconName) {
     }
 }
 
-// iconPath(icon)
-//   input:  an icon key, e.g. "storm"
-//   output: "assets/images/icon-storm.webp"
-//   - one template literal
-//   - no leading slash (the GitHub Pages lesson from Build 5)
+/**
+ * Builds the image path for an icon key, relative to index.html.
+ * @param {string} iconName - One of the eight icon keys, e.g. "storm".
+ * @returns {string} Image path, e.g. "assets/images/icon-storm.webp".
+ */
 export function iconPath(iconName) {
-    return `../assets/images/icon-${iconName}.webp`;
+    return `assets/images/icon-${iconName}.webp`;
 }

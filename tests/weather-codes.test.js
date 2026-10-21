@@ -53,17 +53,29 @@ test("handles an unknown code", () => {
 
 test("handles a missing code", () => {
     assert.equal(weatherCodeToIcon(undefined), "overcast");
-    assert.strictEqual(weatherCodeToIcon(null), "overcast");
+    assert.equal(weatherCodeToIcon(null), "overcast");
 });
 
 test("labels every icon key", () => {
+    assert.equal(iconLabel("sunny"), "Sunny");
     assert.equal(iconLabel("partly-cloudy"), "Partly cloudy");
+    assert.equal(iconLabel("overcast"), "Overcast");
+    assert.equal(iconLabel("fog"), "Fog");
+    assert.equal(iconLabel("drizzle"), "Drizzle");
+    assert.equal(iconLabel("rain"), "Rain");
+    assert.equal(iconLabel("snow"), "Snow");
+    assert.equal(iconLabel("storm"), "Storm");
+});
+
+test("throws for an unknown icon key", () => {
+    assert.throws(() => iconLabel("tornado"), Error);
+    assert.throws(() => iconLabel(undefined), Error);
 });
 
 test("builds a relative image path", () => {
-    assert.equal(iconPath("storm"), "../assets/images/icon-storm.webp");
+    assert.equal(iconPath("storm"), "assets/images/icon-storm.webp");
 });
 
 test("code → path end to end", () => {
-    assert.equal(iconPath(weatherCodeToIcon(3)), "../assets/images/icon-overcast.webp");
+    assert.equal(iconPath(weatherCodeToIcon(3)), "assets/images/icon-overcast.webp");
 });

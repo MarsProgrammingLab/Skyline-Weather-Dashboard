@@ -34,8 +34,13 @@ Open-Meteo describes the weather with a WMO code, and the design has an icon for
 - *Alternatives considered:* returning `null` (every caller would have to check before building an image path) and throwing an error (one bad hour would break the whole hourly list unless every render call caught it).
 - *Follow-up:* when rendering, show "Weather unavailable" as the alt text for a missing code, so screen-reader users get the truth even though the icon is a fallback.
 
+**Unknown icon keys throw instead of falling back.**
+`iconLabel` throws an `Error` for any key outside the eight icon keys, the opposite of how `weatherCodeToIcon` handles bad codes.
+
+- *Why:* weather codes come from the network, so a bad one is expected sometimes and gets a safe fallback. Icon keys only ever come from Skyline's own `weatherCodeToIcon`, so an unknown key means there's a bug in Skyline's code, and failing loudly points straight at it.
+- *Trade-off:* a typo in a key crashes rendering instead of degrading quietly, but it fails in the first test run or page load, not in front of users weeks later.
+
 ## Running locally
- 
 Clone the repository and serve the folder with any static server, then open the address it prints:
  
 ```bash
