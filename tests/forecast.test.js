@@ -62,6 +62,7 @@ test("returns a new object each call", () => {
 
 test("throws when the response has no current block", () => {
     const broken = { timezone: "America/New_York" };
-    // because timezone is at the top level and current doesn't exist there
+    // toCurrent fields with api.current expects the object to have current
+    // because it does not exist, a TypeError should be the output
     assert.throws(() => toCurrent(broken), TypeError);
 });
