@@ -34,6 +34,19 @@ Open-Meteo describes the weather with a WMO code, and the design has an icon for
 - *Alternatives considered:* returning `null` (every caller would have to check before building an image path) and throwing an error (one bad hour would break the whole hourly list unless every render call caught it).
 - *Follow-up:* when rendering, show "Weather unavailable" as the alt text for a missing code, so screen-reader users get the truth even though the icon is a fallback.
 
+**Missing fields in an API response become `null`.**
+`toCurrent` uses `?? null` on every field, so a field Open-Meteo leaves out comes back as `null` instead of `undefined`.
+
+- *Why:* `null` is an explicit "no value" that reads as deliberate, while `undefined` usually means a typo or a wrong path. `format.js` already shows `"-"` for anything that isn't a finite number, so `null` displays correctly with no extra code.
+- *Why `??` and not `||`:* `||` would also replace real zeros. No rain (`precipitation: 0`) and clear sky (`weather_code: 0`) are common, valid readings, and `??` keeps them.
+
+**A response with no `current` block throws.**
+`toCurrent` reads `api.current.<field>` without optional chaining, so a response missing the whole `current` object throws a `TypeError`.
+
+- *Why:* a missing field is a normal gap, but a missing `current` means the request itself went wrong (an error response, or `current=` left out of the URL). Failing loudly points straight at the request; an object full of `null`s would look like a quiet day with no data.
+- *Trade-off:* every caller has to make sure the request succeeded before calling `toCurrent`. Phase 4's error handling does that before any response reaches the adapter.
+- *Pinned by:* the test "throws when the response has no current block".
+
 **Unknown icon keys throw instead of falling back.**
 `iconLabel` throws an `Error` for any key outside the eight icon keys, the opposite of how `weatherCodeToIcon` handles bad codes.
 

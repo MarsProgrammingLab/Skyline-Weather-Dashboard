@@ -32,13 +32,14 @@ test("missing fields become null", () => {
         ...CURRENT_RESPONSE,
         current: {
             ...CURRENT_RESPONSE.current,
-            precipitation: undefined
+            precipitation: undefined,
         },
     };
 
     const result = toCurrent(copy);
 
-    assert.equal(result.precipMm, null);
+    assert.equal(result.precipMm, null);   // the removed field is null
+    assert.equal(result.tempC, 21.6);      // and the fields you kept still come through
 });
 
 test("does not change the response it was given", () => {
@@ -49,7 +50,7 @@ test("does not change the response it was given", () => {
     assert.deepEqual(CURRENT_RESPONSE, before);
 });
 
-test("returns a new object each call”", () => {
+test("returns a new object each call", () => {
     const first = toCurrent(CURRENT_RESPONSE);
     const second = toCurrent(CURRENT_RESPONSE);
 
@@ -57,4 +58,10 @@ test("returns a new object each call”", () => {
     assert.deepEqual(first, second);
     // checks that both are different objects
     assert.notEqual(first, second); 
+});
+
+test("throws when the response has no current block", () => {
+    const broken = { timezone: "America/New_York" };
+    // because timezone is at the top level and current doesn't exist there
+    assert.throws(() => toCurrent(broken), TypeError);
 });

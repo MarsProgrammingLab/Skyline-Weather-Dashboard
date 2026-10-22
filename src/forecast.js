@@ -1,15 +1,13 @@
-// src/forecast.js
-
-// toCurrent(api)
-//   input:  the whole Open-Meteo response object
-//   output: a NEW object in Skyline's shape (the table above)
-//
-//   - read from two levels: most fields are inside api.current,
-//     but timezone is on api itself (2.1.2, nested objects)
-//   - build and return one object literal; don't change api (2.1.8)
-//   - a missing field becomes null, not undefined (decide with ??, 1.2.9)
-//     why null: it's an explicit "no value", and format.js already
-//     shows "-" for anything that isn't a finite number
+/**
+ * Converts an Open-Meteo forecast response into Skyline's current-conditions shape.
+ * Fields missing from the response become null (real zeros are kept).
+ * Reading a response with no `current` block throws, because the request itself failed.
+ * @param {object} api - The parsed Open-Meteo response, with `timezone` and `current`.
+ * @returns {{ time: string|null, timezone: string|null, tempC: number|null,
+ *   feelsLikeC: number|null, humidity: number|null, windKmh: number|null,
+ *   precipMm: number|null, weatherCode: number|null }} A new object; `api` is not changed.
+ * @throws {TypeError} If `api.current` is missing.
+ */
 export function toCurrent(api) {
     return { 
         time: api.current.time ?? null,
