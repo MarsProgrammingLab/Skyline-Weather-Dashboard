@@ -1,13 +1,12 @@
-// debounce(fn, waitMs)
-//   input:  a function to wrap, and a wait in milliseconds
-//   output: a NEW function that callers use instead of fn
-//
-//   state that must survive between calls (where does it live? see 1.5.9):
-//     - the ID of the pending timer, if there is one
-//
-//   each time the returned function is called with some arguments:
-//     1. cancel the pending timer, if any
-//     2. start a new timer for waitMs that will call fn with THESE arguments
+/**
+ * Wraps a function so it runs only after calls have stopped for a set time.
+ * Each call cancels the pending run and starts the wait again, so a burst of
+ * calls produces a single run, using the arguments from the last call.
+ * @param {Function} fn - The function to delay, e.g. a search request.
+ * @param {number} waitMs - Quiet time in milliseconds before fn runs, e.g. 300.
+ * @returns {Function} A debounced version of fn. Calling it returns undefined;
+ *   fn runs later, on a timer.
+ */
 export function debounce(fn, waitMs) {
     let id;
 
