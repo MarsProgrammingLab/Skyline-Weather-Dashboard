@@ -2,3 +2,4 @@
 docs/
 design/
 assets/.DS_Store
+src/playground.js
