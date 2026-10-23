@@ -40,3 +40,29 @@ export function toDaily(api) {
     return days;
 }
 
+/**
+ * Converts Open-Meteo's hourly forecast (one array per field) into one object per hour.
+ * Values are matched by position; gaps (null or a short array) become null.
+ * @param {object} api - The parsed Open-Meteo response, with an `hourly` block.
+ * @returns {Array<{ time: string, tempC: number|null, weatherCode: number|null }>}
+ *   A new array, one entry per time in `hourly.time`.
+ * @throws {TypeError} If `api.hourly` is missing.
+ */
+export function toHourly(api) {
+    return api.hourly.time.map((timeVal, i) => ({
+        time: timeVal,
+        tempC: api.hourly.temperature_2m[i] ?? null,
+        weatherCode: api.hourly.weather_code[i] ?? null
+    }));
+}
+
+/**
+ * Picks out one calendar day's hours from a list made by toHourly.
+ * @param {Array<{ time: string }>} hours - Hourly entries with times like "2026-10-23T14:00".
+ * @param {string} date - The day to keep, as "YYYY-MM-DD".
+ * @returns {Array<object>} A new array of that day's hours, in their original order;
+ *   empty if none match. The input list is not changed.
+ */
+export function hoursForDay(hours, date) {
+    return hours.filter((hour) => hour.time.startsWith(date));
+}
