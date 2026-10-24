@@ -1,11 +1,13 @@
-/*
-    src/main.js copies the pattern from Concept 1's notes.
+import { CURRENT_RESPONSE } from "../tests/fixtures/open-meteo-current.js";
+import { DAILY_RESPONSE } from "../tests/fixtures/open-meteo-daily.js";
+import { toCurrent, toDaily } from "./forecast.js";
+import { renderCurrent, renderDaily} from "./render.js";
 
-    Give your search form an id, then log the result of 
-    document.querySelector('#your-form-id'), the same way the notes' example does with '#list', along with "Skyline loaded."
+const current = toCurrent(CURRENT_RESPONSE);
+const days = toDaily(DAILY_RESPONSE);
 
-    Seeing the form element instead of null proves defer is working.
-*/
+renderCurrent(current, "Dallas, Texas");
+renderDaily(days);
 
 const search = document.querySelector("#search-form")
 console.log(search)

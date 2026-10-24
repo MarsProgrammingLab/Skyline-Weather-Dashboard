@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skyline</title>
     <link rel="stylesheet" href="styles/main.css">
-    <script src="src/main.js" defer></script>
+    <script type="module" src="src/main.js"></script>
 </head>
 <body>
     <header>
@@ -57,97 +57,37 @@
                 <dl id="metrics" class="metrics">
                     <div class="metric">
                         <dt>Feels like</dt>
-                        <dd>18°</dd>
+                        <dd class="metric-feels">18°</dd>
                     </div>
                     <div class="metric">
                         <dt>Humidity</dt>
-                        <dd>46%</dd>
+                        <dd class="metric-humidity">46%</dd>
                     </div>
                     <div class="metric">
                         <dt>Wind</dt>
-                        <dd>14 km/h</dd>
+                        <dd class="metric-wind">14 km/h</dd>
                     </div>
                     <div class="metric">
                         <dt>Precipitation</dt>
-                        <dd>0 mm</dd>
+                        <dd class="metric-precip">0 mm</dd>
                     </div>
                 </dl>
             </section>
             <section aria-labelledby="daily-title" class="daily-panel">
                 <h2 id="daily-title">Daily forecast</h2>
-                <ol role="list" class="day-list">
+                <ol role="list" class="day-list"></ol>
+                <template id="day-template">
                     <li>
-                        <p><time datetime="2026-10-08">Thursday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
+                        <p><time datetime></time></p>
+                        <img src alt width="320" height="320">
                         <dl class="day-temps">
                             <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
+                            <dd class="high-temp"></dd>
                             <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
+                            <dd class="low-temp"></dd>
                         </dl>
-                        
-                    </li>
-                    <li>
-                        <p><time datetime="2026-10-09">Friday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                        <dl class="day-temps">
-                            <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
-                            <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
-                        </dl>
-                    </li>
-                    <li>
-                        <p><time datetime="2026-10-10">Saturday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                        <dl class="day-temps">
-                            <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
-                            <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
-                        </dl>
-                    </li>
-                    <li>
-                        <p><time datetime="2026-10-11">Sunday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                        <dl class="day-temps">
-                            <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
-                            <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
-                        </dl>
-                    </li>
-                    <li>
-                        <p><time datetime="2026-10-12">Monday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                        <dl class="day-temps">
-                            <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
-                            <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
-                        </dl>
-                    </li>
-                    <li>
-                        <p><time datetime="2026-10-13">Tuesday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                        <dl class="day-temps">
-                            <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
-                            <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
-                        </dl>
-                    </li>
-                    <li>
-                        <p><time datetime="2026-10-14">Wednesday</time></p>
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320">
-                        <dl class="day-temps">
-                            <dt class="visually-hidden">High</dt>
-                            <dd class="high-temp">20°</dd>
-                            <dt class="visually-hidden">Low</dt>
-                            <dd class="low-temp">10°</dd>
-                        </dl>
-                    </li>
-                </ol>
+                    </li>    
+                </template>
             </section>
             <section aria-labelledby="hourly-title" class="hourly-panel">
                 <div class="hourly-header">
