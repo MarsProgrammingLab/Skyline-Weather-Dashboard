@@ -3,15 +3,15 @@ import { weatherCodeToIcon, iconPath, iconLabel } from "./weather-codes.js"
 
 // DOM elements
 const placeEl =  document.querySelector("#location-title");
-const dateEl = document.querySelector(".today-place time")
-const tempEl   = document.querySelector(".location-temp")
-const iconEl   = document.querySelector(".today-icon")
-const feelsEl  = document.querySelector(".metric-feels")
-const humidEl  = document.querySelector(".metric-humidity")
-const windEl   = document.querySelector(".metric-wind")
-const precipEl = document.querySelector(".metric-precip")
-const dayListEl     = document.querySelector(".day-list")
-const dayTemplateEl = document.querySelector("#day-template")
+const dateEl = document.querySelector(".today-place time");
+const tempEl   = document.querySelector(".location-temp");
+const iconEl   = document.querySelector(".today-icon");
+const feelsEl  = document.querySelector(".metric-feels");
+const humidEl  = document.querySelector(".metric-humidity");
+const windEl   = document.querySelector(".metric-wind");
+const precipEl = document.querySelector(".metric-precip");
+const dayListEl     = document.querySelector(".day-list");
+const dayTemplateEl = document.querySelector("#day-template");
 
 // Date formatters
 // Example output: "Thursday, October 22, 2026"
@@ -37,7 +37,7 @@ export function renderCurrent(current, placeName) {
 
     placeEl.textContent = placeName;
     dateEl.textContent = longDate.format(new Date(current.time));
-    dateEl.dateTime = day.date;
+    dateEl.dateTime = current.date;
     tempEl.textContent = formatTemp(current.tempC);
     iconEl.src = iconPath(iconKey);
     iconEl.alt = iconLabel(iconKey);

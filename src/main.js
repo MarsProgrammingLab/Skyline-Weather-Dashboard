@@ -6,8 +6,5 @@ import { renderCurrent, renderDaily} from "./render.js";
 const current = toCurrent(CURRENT_RESPONSE);
 const days = toDaily(DAILY_RESPONSE);
 
-renderCurrent(current, "Dallas, Texas");
+renderCurrent(current, "Charlotte, North Carolina");
 renderDaily(days);
-
-const search = document.querySelector("#search-form")
-console.log(search)
