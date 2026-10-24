@@ -8,24 +8,37 @@ import { DAILY_RESPONSE } from "./fixtures/open-meteo-daily.js";
 test("reads the timezone from the top level", () => {
     const result = toCurrent(CURRENT_RESPONSE);
 
-    assert.equal(result.timezone, "America/New_York");
+    assert.equal(result.timezone, CURRENT_RESPONSE.timezone);
 });
 
 test("maps every current field to Skyline's shape", () => {
     const result = toCurrent(CURRENT_RESPONSE);
+    const c = CURRENT_RESPONSE.current;
 
     const expected = {
-        time: "2026-10-22T14:15",
-        timezone: "America/New_York",
-        tempC: 21.6,
-        feelsLikeC: 19.2,
-        humidity: 35,
-        windKmh: 14.4,
-        precipMm: 0,
-        weatherCode: 0,
+        time: c.time,
+        timezone: CURRENT_RESPONSE.timezone,
+        tempC: c.temperature_2m,
+        feelsLikeC: c.apparent_temperature,
+        humidity: c.relative_humidity_2m,
+        windKmh: c.wind_speed_10m,
+        precipMm: c.precipitation,
+        weatherCode: c.weather_code,
     };
 
     assert.deepEqual(result, expected);
+});
+
+test("keeps real zeros instead of turning them into null", () => {
+    const calm = {
+        ...CURRENT_RESPONSE,
+        current: { ...CURRENT_RESPONSE.current, precipitation: 0, weather_code: 0 },
+    };
+
+    const result = toCurrent(calm);
+
+    assert.equal(result.precipMm, 0);
+    assert.equal(result.weatherCode, 0);
 });
 
 test("missing fields become null", () => {
@@ -39,8 +52,8 @@ test("missing fields become null", () => {
 
     const result = toCurrent(copy);
 
-    assert.equal(result.precipMm, null);   // the removed field is null
-    assert.equal(result.tempC, 21.6);      // and the fields you kept still come through
+    assert.equal(result.precipMm, null);                                  // the removed field is null
+    assert.equal(result.tempC, CURRENT_RESPONSE.current.temperature_2m);  // the fields you kept still come through
 });
 
 test("does not change the response it was given", () => {
