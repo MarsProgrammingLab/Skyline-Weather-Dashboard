@@ -1,4 +1,5 @@
 import { formatTemp, formatWind, formatPrecip, getHour, formatHour } from "./format.js";
+import { celsiusToFahrenheit, inUnits, kmhToMph, mmToInches } from "./units.js";
 import { weatherCodeToIcon, iconPath, iconLabel } from "./weather-codes.js";
 
 // Selectors
@@ -37,8 +38,9 @@ const weekDay = new Intl.DateTimeFormat("en-US",
  * Fills the current-conditions card.
  * @param {object} current - From toCurrent.
  * @param {string} placeName - Shown as the heading, e.g. "Charlotte, North Carolina".
+ * @param {string} units - "metric" or "imperial"
  */
-export function renderCurrent(current, placeName) {
+export function renderCurrent(current, placeName, units) {
     // current -> object from toCurrent
     // placeName -> name of location (e.g. Charlotte, North Carolina)
     const iconKey = weatherCodeToIcon(current.weatherCode);
@@ -46,30 +48,33 @@ export function renderCurrent(current, placeName) {
     placeEl.textContent = placeName;
     dateEl.textContent = longDate.format(new Date(current.time));
     dateEl.dateTime = current.time.slice(0,10);
-    tempEl.textContent = formatTemp(current.tempC);
+    tempEl.textContent = formatTemp(inUnits(current.tempC,units, celsiusToFahrenheit));
     iconEl.src = iconPath(iconKey);
     iconEl.alt = iconLabel(iconKey);
-    feelsEl.textContent = formatTemp(current.feelsLikeC);
+    feelsEl.textContent = formatTemp(inUnits(current.feelsLikeC, units,celsiusToFahrenheit));
     humidEl.textContent = `${current.humidity}%`;
-    windEl.textContent = formatWind(current.windKmh, "km/h");
-    precipEl.textContent = formatPrecip(current.precipMm, "mm");
+    windEl.textContent = formatWind(inUnits(current.windKmh, units, kmhToMph), units === "imperial" ? "mph" : "km/h");
+    precipEl.textContent = formatPrecip(inUnits(current.precipMm, units, mmToInches), units === "imperial" ? "in" : "mm");
+
 }
 
 /**
  * Draws one card per day in the 7-day list, replacing what was there.
  * @param {object[]} days - From toDaily.
+ * @param {string} units - "metric" or "imperial"
  */
-export function renderDaily(days) {
-    const items = days.map(createDay);
+export function renderDaily(days, units) {
+    const items = days.map((day) => createDay(day, units));
     dayListEl.replaceChildren(...items);
 }
 
 /**
  * Builds one day card from the day template.
  * @param {object} day - One entry from toDaily.
+ * @param {string} units - "metric" or "imperial"
  * @returns {HTMLLIElement} The filled <li>, not yet on the page.
  */
-function createDay(day) {
+function createDay(day, units) {
     // day -> one object from toDaily: { date, weatherCode, maxC, minC }
     const li = dayTemplateEl.content.firstElementChild.cloneNode(true);
     // find elements inside li
@@ -85,8 +90,8 @@ function createDay(day) {
     imgEl.src = iconPath(iconKey);
     imgEl.alt = iconLabel(iconKey);
 
-    highEl.textContent = formatTemp(day.maxC);
-    lowEl.textContent = formatTemp(day.minC);
+    highEl.textContent = formatTemp(inUnits(day.maxC,units,celsiusToFahrenheit));
+    lowEl.textContent = formatTemp(inUnits(day.minC, units, celsiusToFahrenheit));
 
     return li;
 }
@@ -102,9 +107,10 @@ export function fillDaySelect(days) {
 /**
  * Builds one hour row from the hour template.
  * @param {object} hour - One entry from toHourly.
+ * @param {string} units - "metric" or "imperial"
  * @returns {HTMLLIElement} The filled <li>, not yet on the page.
  */
-function createHour(hour) {
+function createHour(hour, units) {
     // hour -> one object from toHourly: { time, tempC, weatherCode }
     const li = hourTemplateEl.content.firstElementChild.cloneNode(true);
     const imgEl = li.querySelector("img");
@@ -118,7 +124,7 @@ function createHour(hour) {
     timeEl.textContent = formatHour(getHour(hour.time));
     timeEl.dateTime = hour.time;
 
-    hourTempEl.textContent = formatTemp(hour.tempC);
+    hourTempEl.textContent = formatTemp(inUnits(hour.tempC, units, celsiusToFahrenheit));
 
     return li;
 }
@@ -126,8 +132,9 @@ function createHour(hour) {
 /**
  * Draws the hourly list, replacing what was there.
  * @param {object[]} hours - Entries from toHourly, usually one day's worth.
+ * @param {string} units - "metric" or "imperial"
  */
-export function renderHourly(hours) {
-    const items = hours.map(createHour);
+export function renderHourly(hours, units) {
+    const items = hours.map((hour) => createHour(hour, units));
     hourListEl.replaceChildren(...items);
 }

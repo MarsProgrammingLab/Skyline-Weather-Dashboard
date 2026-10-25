@@ -29,3 +29,20 @@ export function kmhToMph(kmh) {
 export function mmToInches(mm) {
     return mm / MM_PER_INCH;
 }
+
+/**
+ * Puts a metric reading in the units the user picked.
+ * @param {number|null} reading - The reading as the API sends it (metric weather data).
+ * @param {string} units - "metric" or "imperial".
+ * @param {(value: number) => number} toImperial - The converter to use, e.g. celsiusToFahrenheit.
+ * @returns {number|null} The reading in the chosen units, or null if it was missing.
+ */
+export function inUnits(reading, units, toImperial) {
+    if (reading === null) {
+        return reading;
+    } 
+    if (units === "metric") {
+        return reading;
+    }
+    return toImperial(reading); 
+}

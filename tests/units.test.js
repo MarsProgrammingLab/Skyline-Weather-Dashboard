@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { celsiusToFahrenheit, kmhToMph, mmToInches } from "../src/units.js";
+import { celsiusToFahrenheit, kmhToMph, mmToInches, inUnits } from "../src/units.js";
 
 
 test("kmhToMph converts 14 km/h to 8.70 mph", () => {
@@ -30,4 +30,16 @@ test("mmToInches(25.4) converts to 1", () => {
 
 test("mmToInches(0) converts to 0", () => {
   assert.equal(mmToInches(0), 0);
+});
+
+test("inUnits returns a metric reading unchanged", () => {
+  assert.equal(inUnits(20, "metric", celsiusToFahrenheit), 20);
+});
+
+test("inUnits converts a reading when units are imperial", () => {
+  assert.equal(inUnits(20, "imperial", celsiusToFahrenheit), 68);
+});
+
+test("inUnits keeps a missing reading as null in imperial", () => {
+  assert.equal(inUnits(null, "imperial", celsiusToFahrenheit(null)), null);
 });
