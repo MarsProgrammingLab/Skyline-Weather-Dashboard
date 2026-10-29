@@ -3,6 +3,7 @@ import { DAILY_RESPONSE } from "../tests/fixtures/open-meteo-daily.js";
 import { HOURLY_RESPONSE } from "../tests/fixtures/open-meteo-hourly.js";
 import { toCurrent, toDaily, toHourly, hoursForDay } from "./forecast.js";
 import { renderCurrent, renderDaily, fillDaySelect, renderHourly} from "./render.js";
+import { getForecast } from "./api.js";
 
 // Entry point: turns the sample responses into Skyline's shapes, renders every panel,
 // and redraws the hourly list when a different day is picked.
@@ -17,6 +18,8 @@ let selectedDate = days[0].date;
 
 const daySelect = document.getElementById("day");
 const unitsBtn = document.querySelector(".units-btn");
+
+
 
 /** Draws every region from the current state. */
 function render() {

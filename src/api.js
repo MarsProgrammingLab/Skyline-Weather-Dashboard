@@ -29,5 +29,21 @@ export async function searchPlace(name) {
  * @returns {Promise<object>} The raw forecast response, ready for toCurrent, toDaily, and toHourly.
  */
 export async function getForecast(latitude, longitude) {
+    const url = new URL(FORECAST_URL);
+
+    url.searchParams.set("latitude", latitude);
+    url.searchParams.set("longitude", longitude);
+    url.searchParams.set("current", "temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m");
+    url.searchParams.set("daily", "weather_code,temperature_2m_max,temperature_2m_min");
+    url.searchParams.set("hourly", "temperature_2m,weather_code");
+    url.searchParams.set("forecast_days", 7);
+    url.searchParams.set("timezone", "auto");
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+    }
     
+    return await response.json();
 }
