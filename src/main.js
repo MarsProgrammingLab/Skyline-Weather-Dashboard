@@ -12,6 +12,7 @@ let days = [];
 let hours = [];
 let units = "metric";
 let selectedDate = null;
+let lastQuery = "";
 
 // Elements
 const daySelect = document.getElementById("day");
@@ -20,6 +21,8 @@ const searchBtn = document.querySelector(".search-btn");
 const statusEl = document.querySelector(".search-status");
 const dashboardEl = document.querySelector(".dashboard");
 const errorEl = document.querySelector(".error-state");
+const formEl = document.getElementById("search-form");
+const retryBtn = document.querySelector(".retry-btn");
 
 /** Draws every region from the current state. */
 function render() {
@@ -40,8 +43,45 @@ function render() {
     unitsBtn.textContent = units === "imperial" ? "Switch to metric" : "Switch to imperial";
 }
 
-render();
+/**
+ * Searches for a place, loads its forecast, and updates the state for however it ends.
+ * @param {string} query - The place name to search for.
+ */
+async function loadPlace(query) {
+    lastQuery = query;
+    status = "loading";
 
+    render();
+
+    try {
+        const place = await searchPlace(query);
+
+        if (place === null) {
+            status = "empty";
+        } else {
+            const forecastData = await getForecast(place.latitude, place.longitude);
+
+            current = toCurrent(forecastData);
+            days = toDaily(forecastData);
+            hours = toHourly(forecastData);
+
+            placeName = `${place.name}, ${place.country}`;
+
+            selectedDate = days[0].date;
+            fillDaySelect(days);
+            status = "success";
+        }
+    } catch (error) {
+        console.error(error);
+        status = "error";
+    }
+
+    render();
+}
+
+loadPlace("Charlotte");
+
+// Event listeners
 daySelect.addEventListener("change", (event) => {
     selectedDate = event.target.value;
     render();
@@ -52,3 +92,15 @@ unitsBtn.addEventListener("click", () => {
     render();
 });
 
+formEl.addEventListener("submit", (event) => {
+    event.preventDefault();
+    
+    const query = event.target.elements.q.value.trim();
+    if (query === "") return;
+
+    loadPlace(query);
+});
+
+retryBtn.addEventListener("click", () => {
+    loadPlace(lastQuery);
+});
