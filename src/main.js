@@ -1,37 +1,46 @@
-import { CURRENT_RESPONSE } from "../tests/fixtures/open-meteo-current.js";
-import { DAILY_RESPONSE } from "../tests/fixtures/open-meteo-daily.js";
-import { HOURLY_RESPONSE } from "../tests/fixtures/open-meteo-hourly.js";
 import { toCurrent, toDaily, toHourly, hoursForDay } from "./forecast.js";
-import { renderCurrent, renderDaily, fillDaySelect, renderHourly} from "./render.js";
-import { getForecast } from "./api.js";
+import { renderCurrent, renderDaily, fillDaySelect, renderHourly } from "./render.js";
+import { searchPlace, getForecast } from "./api.js";
 
-// Entry point: turns the sample responses into Skyline's shapes, renders every panel,
-// and redraws the hourly list when a different day is picked.
-// The three fixture imports are temporary: Phase 4 replaces them with live requests.
+// Entry point: holds the page state, draws it, and reacts to user input.
 
-const hours = toHourly(HOURLY_RESPONSE);
-const current = toCurrent(CURRENT_RESPONSE);
-const days = toDaily(DAILY_RESPONSE);
-
+// State
+let status = "loading";
+let placeName = "";
+let current = null;
+let days = [];
+let hours = [];
 let units = "metric";
-let selectedDate = days[0].date;
+let selectedDate = null;
 
+// Elements
 const daySelect = document.getElementById("day");
 const unitsBtn = document.querySelector(".units-btn");
-
-
+const searchBtn = document.querySelector(".search-btn");
+const statusEl = document.querySelector(".search-status");
+const dashboardEl = document.querySelector(".dashboard");
+const errorEl = document.querySelector(".error-state");
 
 /** Draws every region from the current state. */
 function render() {
-    renderHourly(hoursForDay(hours, selectedDate), units);
-    renderCurrent(current, "Charlotte, North Carolina", units);
-    renderDaily(days, units);
+    dashboardEl.hidden = status !== "success";
+    errorEl.hidden = status !== "error";
+    statusEl.hidden = status !== "loading" && status !== "empty";
+
+    statusEl.textContent = status === "loading" ? "Loading…" : "No search result found!";
+    
+    searchBtn.disabled = status === "loading";
+
+    if (status === "success") {
+        renderHourly(hoursForDay(hours, selectedDate), units);
+        renderCurrent(current, placeName, units);
+        renderDaily(days, units);
+    }
+    
     unitsBtn.textContent = units === "imperial" ? "Switch to metric" : "Switch to imperial";
 }
 
-fillDaySelect(days);
 render();
-
 
 daySelect.addEventListener("change", (event) => {
     selectedDate = event.target.value;

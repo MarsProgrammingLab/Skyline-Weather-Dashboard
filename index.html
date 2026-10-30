@@ -10,10 +10,7 @@
 <body>
     <header>
         <img src="assets/images/logo.svg" alt="Weather now" width="197" height="40">
-        
-        <div class="dropdown">
-            <button type="button" class="units-btn">Switch to imperial</button>
-        </div>
+        <button type="button" class="units-btn">Switch to imperial</button>
     </header>
     <main id="main-content">
         <h1 class="main-h1">How's the sky looking today?</h1>
@@ -21,34 +18,35 @@
             <input type="search" id="search" class="search" name="q" placeholder="Search for a place..." required>
             <button type="submit" class="search-btn">Search</button>
         </form>
+        <p class="search-status" role="status" hidden></p>
         <div class="dashboard">
             <section aria-labelledby="location-title" class="current-condition">
                 <div class="today-summary">
                     <div class="today-place">
-                        <h2 id="location-title">Charlotte, North Carolina</h2>
-                        <p><time datetime="2026-10-08">Thursday, October 8, 2026</time></p>
+                        <h2 id="location-title"></h2>
+                        <p><time datetime=""></time></p>
                     </div>
                     <div class="today-temp">
-                        <img src="assets/images/icon-sunny.webp" alt="Sunny" width="320" height="320" class="today-icon">
-                        <p class="location-temp">20°</p>
+                        <img src="" alt="" width="320" height="320" class="today-icon">
+                        <p class="location-temp"></p>
                     </div>
                 </div>
                 <dl id="metrics" class="metrics">
                     <div class="metric">
                         <dt>Feels like</dt>
-                        <dd class="metric-feels">18°</dd>
+                        <dd class="metric-feels"></dd>
                     </div>
                     <div class="metric">
                         <dt>Humidity</dt>
-                        <dd class="metric-humidity">46%</dd>
+                        <dd class="metric-humidity"></dd>
                     </div>
                     <div class="metric">
                         <dt>Wind</dt>
-                        <dd class="metric-wind">14 km/h</dd>
+                        <dd class="metric-wind"></dd>
                     </div>
                     <div class="metric">
                         <dt>Precipitation</dt>
-                        <dd class="metric-precip">0 mm</dd>
+                        <dd class="metric-precip"></dd>
                     </div>
                 </dl>
             </section>
@@ -85,8 +83,12 @@
                 </template>
             </section>
         </div>
-        
-        
+        <section class="error-state" aria-labelledby="error-title" hidden>
+            <img src="assets/images/icon-error.svg" alt="" width="18" height="18">
+            <h2 id="error-title">Something went wrong</h2>
+            <p>We couldn’t connect to the server (API error). Please try again in a few moments.</p>
+            <button type="button" class="retry-btn"><img src="assets/images/icon-retry.svg" alt="" width="16" height="17">Retry</button>
+        </section>
     </main>
     <footer class="attribution">
         <p>Weather data by <a href="https://open-meteo.com/">Open-Meteo</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
