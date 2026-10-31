@@ -22,7 +22,7 @@ const STORAGE_KEY = "skyline:lastPlace";
  */
 function loadSavedPlace() {
     try {
-
+        return localStorage.getItem(STORAGE_KEY);
     } catch (error) {
         return null;
     }
@@ -34,7 +34,7 @@ function loadSavedPlace() {
  */
 function savePlace(query) {
     try {
-
+        localStorage.setItem(STORAGE_KEY, query);
     } catch (error) {}
 }
 
@@ -94,6 +94,7 @@ async function loadPlace(query) {
             selectedDate = days[0].date;
             fillDaySelect(days);
             status = "success";
+            savePlace(query);
         }
     } catch (error) {
         console.error(error);
@@ -103,7 +104,7 @@ async function loadPlace(query) {
     render();
 }
 
-loadPlace("Charlotte");
+loadPlace(loadSavedPlace() ?? "Charlotte");
 
 // Event listeners
 daySelect.addEventListener("change", (event) => {
