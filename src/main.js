@@ -14,6 +14,30 @@ let units = "metric";
 let selectedDate = null;
 let lastQuery = "";
 
+const STORAGE_KEY = "skyline:lastPlace";
+
+/**
+ * Reads the last place that loaded successfully.
+ * @returns {string|null} The saved place, or null if nothing is saved or storage is unavailable.
+ */
+function loadSavedPlace() {
+    try {
+
+    } catch (error) {
+        return null;
+    }
+}
+
+/**
+ * Remembers a place that loaded successfully. Does nothing if storage is unavailable.
+ * @param {string} query - The place to remember.
+ */
+function savePlace(query) {
+    try {
+
+    } catch (error) {}
+}
+
 // Elements
 const daySelect = document.getElementById("day");
 const unitsBtn = document.querySelector(".units-btn");
@@ -39,7 +63,6 @@ function render() {
         renderCurrent(current, placeName, units);
         renderDaily(days, units);
     }
-    
     unitsBtn.textContent = units === "imperial" ? "Switch to metric" : "Switch to imperial";
 }
 
@@ -65,7 +88,8 @@ async function loadPlace(query) {
             days = toDaily(forecastData);
             hours = toHourly(forecastData);
 
-            placeName = `${place.name}, ${place.country}`;
+            const region = place.country_code === "US" ? place.admin1 ?? place.country : place.country;
+            placeName = `${place.name}, ${region}`;
 
             selectedDate = days[0].date;
             fillDaySelect(days);
@@ -94,7 +118,7 @@ unitsBtn.addEventListener("click", () => {
 
 formEl.addEventListener("submit", (event) => {
     event.preventDefault();
-    
+
     const query = event.target.elements.q.value.trim();
     if (query === "") return;
 
