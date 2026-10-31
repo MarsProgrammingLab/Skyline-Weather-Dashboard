@@ -8,14 +8,14 @@ Built with plain HTML, CSS, and JavaScript (no frameworks, no libraries, no buil
  
 ## Features
  
-- [ ] Search any place by name, with suggestions as you type
-- [ ] Current conditions: temperature, weather icon, place, and date
-- [ ] Feels-like temperature, humidity, wind speed, and precipitation
-- [ ] 7-day forecast with daily highs, lows, and icons
-- [ ] Hourly forecast for any day of the week, picked from a day selector
-- [ ] Units menu: switch everything between metric and imperial, or set temperature, wind, and precipitation units one at a time
-- [ ] Responsive from 320 px phones to large desktops, with hover and focus states on every control
-- [ ] Remembers your units and last search, and opens offline with the last forecast
+- [x] Search any place by name, with suggestions as you type
+- [x] Current conditions: temperature, weather icon, place, and date
+- [x] Feels-like temperature, humidity, wind speed, and precipitation
+- [x] 7-day forecast with daily highs, lows, and icons
+- [x] Hourly forecast for any day of the week, picked from a day selector
+- [x] Units menu: switch everything between metric and imperial, or set temperature, wind, and precipitation units one at a time
+- [x] Responsive from 320 px phones to large desktops, with hover and focus states on every control
+- [x] Remembers your units and last search, and opens offline with the last forecast
 ## Technical highlights
  
 - **No API key.** Forecasts and place search come from [Open-Meteo](https://open-meteo.com), so there's no secret to expose in a browser-only app.
